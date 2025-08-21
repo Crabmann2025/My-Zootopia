@@ -28,9 +28,9 @@ def get_type(animal):
     return animal.get("characteristics", {}).get("type")
 
 
-def get_animal_string(animal):
-    """Returns the information of an animal as a string"""
-    output = ''  # leere Zeichenkette definieren
+def get_animal_html(animal):
+    """Returns the information of an animal as an HTML string"""
+    output = '<li class="cards__item">\n'
 
     name = get_name(animal)
     diet = get_diet(animal)
@@ -38,27 +38,27 @@ def get_animal_string(animal):
     typ = get_type(animal)
 
     if name:
-        output += f"Name: {name}\n"
+        output += f"Name: {name}<br/>\n"
     if diet:
-        output += f"Ernährung: {diet}\n"
+        output += f"Diet: {diet}<br/>\n"
     if location:
-        output += f"Lebensraum: {location}\n"
+        output += f"Location: {location}<br/>\n"
     if typ:
-        output += f"Typ: {typ}\n"
+        output += f"Type: {typ}<br/>\n"
 
-    output += "\n"  # Leerzeile zwischen den Tieren
+    output += '</li>\n'  # End of list item
     return output
 
 
-def get_all_animals_string(data):
-    """Iterates through all animals and returns a single string"""
+def get_all_animals_html(data):
+    """Iterates over all animals and returns a complete HTML string"""
     output = ''
     for animal in data:
-        output += get_animal_string(animal)
+        output += get_animal_html(animal)
     return output
 
 
 if __name__ == "__main__":
     animals = load_data("animals_data.json")
-    all_animals_text = get_all_animals_string(animals)
-    print(all_animals_text)  # Optional: Ausgabe auf dem Bildschirm
+    all_animals_html = get_all_animals_html(animals)
+    print(all_animals_html)  # Optional: Output on the screen

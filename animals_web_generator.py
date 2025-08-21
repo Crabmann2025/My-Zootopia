@@ -28,30 +28,37 @@ def get_type(animal):
     return animal.get("characteristics", {}).get("type")
 
 
-def print_animals(animal):
-    """Displays the information of an animal"""
+def get_animal_string(animal):
+    """Returns the information of an animal as a string"""
+    output = ''  # leere Zeichenkette definieren
+
     name = get_name(animal)
     diet = get_diet(animal)
     location = get_location(animal)
     typ = get_type(animal)
 
     if name:
-        print(f"Name: {name}")
+        output += f"Name: {name}\n"
     if diet:
-        print(f"diet: {diet}")
+        output += f"Ernährung: {diet}\n"
     if location:
-        print(f"location: {location}")
+        output += f"Lebensraum: {location}\n"
     if typ:
-        print(f"Typ: {typ}")
-    print()
+        output += f"Typ: {typ}\n"
+
+    output += "\n"  # Leerzeile zwischen den Tieren
+    return output
 
 
-def animal_print(data):
-    """Iterates through all animals"""
+def get_all_animals_string(data):
+    """Iterates through all animals and returns a single string"""
+    output = ''
     for animal in data:
-        print_animals(animal)
+        output += get_animal_string(animal)
+    return output
 
 
 if __name__ == "__main__":
     animals = load_data("animals_data.json")
-    animal_print(animals)
+    all_animals_text = get_all_animals_string(animals)
+    print(all_animals_text)  # Optional: Ausgabe auf dem Bildschirm
